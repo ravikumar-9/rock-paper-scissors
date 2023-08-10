@@ -1,7 +1,6 @@
 import {ImageButton, OptionImage} from './styledComponents'
 
 const GameCard = props => {
-  console.log(props)
   const {choiceDetails, onClickOption} = props
   const {id, imageUrl, testId} = choiceDetails
 

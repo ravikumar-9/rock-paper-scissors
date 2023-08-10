@@ -68,3 +68,7 @@ export const GameCardContainer = styled.ul`
   flex-wrap: wrap;
   justify-content: space-around;
 `
+export const RulesImage = styled.img`
+  height: 100px;
+  width: 100px;
+`

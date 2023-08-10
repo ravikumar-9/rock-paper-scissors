@@ -1,5 +1,9 @@
 import {Component} from 'react'
 
+import Popup from 'reactjs-popup'
+
+import 'reactjs-popup/dist/index.css'
+
 import GameCard from '../GameCard'
 
 import ResultView from '../ResultView'
@@ -13,7 +17,10 @@ import {
   ScoreText,
   Score,
   GameCardContainer,
+  RulesImage,
 } from './styledComponents'
+
+import './index.css'
 
 class Home extends Component {
   state = {
@@ -25,15 +32,18 @@ class Home extends Component {
   }
 
   onChangeGame = () => {
-    this.setState({showGameResult: false})
+    this.setState({
+      showGameResult: false,
+      yourChoiceImage: '',
+      opponentChoiceImage: '',
+      result: '',
+    })
   }
 
   onClickOption = (imageId, url) => {
-    console.log(imageId)
-    console.log(url)
     const {choicesList} = this.props
 
-    const randomIndex = Math.floor(Math.random(choicesList.length - 1))
+    const randomIndex = Math.floor(Math.random() * choicesList.length)
 
     const randomChoiceId = choicesList[randomIndex].id
     const randomChoiceImageUrl = choicesList[randomIndex].imageUrl
@@ -108,6 +118,8 @@ class Home extends Component {
       opponentChoiceImage,
     } = this.state
 
+    console.log(result, yourChoiceImage, opponentChoiceImage)
+
     return (
       <BgContainer>
         <TopSection>
@@ -143,6 +155,34 @@ class Home extends Component {
             ))}
           </GameCardContainer>
         )}
+        <div className="popup-container">
+          <Popup
+            modal
+            trigger={
+              <button type="button" className="trigger-button">
+                Rules
+              </button>
+            }
+          >
+            {close => (
+              <>
+                <div>
+                  <button
+                    type="button"
+                    className="trigger-button"
+                    onClick={() => close()}
+                  >
+                    c
+                  </button>
+                  <RulesImage
+                    src="https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/rules-image.png"
+                    alt="rules"
+                  />
+                </div>
+              </>
+            )}
+          </Popup>
+        </div>
       </BgContainer>
     )
   }
